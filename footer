@@ -1,0 +1,306 @@
+  </div>
+</section>
+
+    <!--jQuery-->
+    <script src='https://aaf1a18515da0e792f78-c27fdabe952dfc357fe25ebf5c8897ee.ssl.cf5.rackcdn.com/1939/jquery3.4.1.min.js?v=1572400573000'></script>
+
+    <!-- email regex remove spaces/commas -->
+    <script src="https://aaf1a18515da0e792f78-c27fdabe952dfc357fe25ebf5c8897ee.ssl.cf5.rackcdn.com/1939/emailInputCleanse.js?v=1560216746000"></script>
+
+    <!-- input mask -->
+    <script src="https://aaf1a18515da0e792f78-c27fdabe952dfc357fe25ebf5c8897ee.ssl.cf5.rackcdn.com/1939/jquery.inputmask.bundle.min.js?v=1550438408000"></script>
+    
+<script>
+if (window.location.href.indexOf("data/2") > -1) {
+    console.log("page 2");
+    $('#intro').removeClass('transitionIn');
+    $('#intro').addClass('transitionOut');
+    $('#Q7').addClass('transitionIn');
+} else {
+    console.log("page 1");
+    
+    // insert Q&A
+    $('#Q1 h2').text(questions.Q1text[0]);
+    var i;
+    for(i=0;i<6;i++){
+        $('#Q1 button').eq(i).text(questions.Q1text[i+1]);
+    }
+    $('#Q2 h2').text(questions.Q2text[0]);
+    for(i=0;i<6;i++){
+        $('#Q2 button').eq(i).text(questions.Q2text[i+1]);
+    }
+    $('#Q3 h2').text(questions.Q3text[0]);
+    for(i=0;i<6;i++){
+        $('#Q3 button').eq(i).text(questions.Q3text[i+1]);
+    }
+    $('#Q4 h2').text(questions.Q4text[0]);
+    for(i=0;i<6;i++){
+        $('#Q4 button').eq(i).text(questions.Q4text[i+1]);
+    }
+    $('#Q5 h2').text(questions.Q5text[0]);
+    for(i=0;i<6;i++){
+        $('#Q5 button').eq(i).text(questions.Q5text[i+1]);
+    }
+    $('#Q6 h2').text(questions.Q6text[0]);
+    for(i=0;i<6;i++){
+        $('#Q6 button').eq(i).text(questions.Q6text[i+1]);
+    }
+}
+
+var score = 0;
+var answerArray = { 
+  "Q1" : {answer:1},
+  "Q2" : {answer:1},
+  "Q3" : {answer:1},
+  "Q4" : {answer:1},
+  "Q5" : {answer:1},
+  "Q6" : {answer:1},
+}
+$('#gpLogo').click(function(){
+    window.open('https://greenpeace.org.nz');
+});
+$('button').click(function(){
+  // get the id of button section wrapper
+  var id = $(this).closest('section').attr("id");
+  var answer = this.value;
+  console.log("id answer", id + " "+ answer);
+  saveAnswer(id, answer);
+  var buttonType = $(this).attr('type');
+  console.log("buttonType", buttonType);
+  if( buttonType == 'button'){
+    // Transition to next slide
+    $(this).closest("section").removeClass("transitionIn");
+    $(this).closest("section").addClass("transitionOut");
+    $(this).closest("section").next().addClass("transitionIn");
+  }
+   // console.log("answerArray ", answerArray );
+});
+
+function calc(){
+  score = 0;
+  console.log("score reset ", score);
+
+  // Calculate Score
+  score = answerArray.Q1.answer+answerArray.Q2.answer+
+    answerArray.Q3.answer+answerArray.Q4.answer+
+    answerArray.Q5.answer+answerArray.Q6.answer;
+  // Show result
+  switch(true){
+    case (score<13):
+      var range = "1 6-12 "+score;
+      $('#en__field_supporter_NOT_TAGGED_12').val(range);
+      break;
+    case (score<19):
+      var range = "2 13-18 "+score;
+      $('#en__field_supporter_NOT_TAGGED_12').val(range);
+      break;
+    case (score<25):
+      var range = "3 19-24 "+score;
+      $('#en__field_supporter_NOT_TAGGED_12').val(range);
+      break;
+    case (score<31):
+      var range = "4 25-30 "+score;
+      $('#en__field_supporter_NOT_TAGGED_12').val(range);
+      break;
+    default:
+      var range = "5 31-36 "+score;
+      $('#en__field_supporter_NOT_TAGGED_12').val(range);
+      break;
+  }
+
+  $('#showScore').text(score+" - in range "+range);
+}
+
+
+function saveAnswer(id, answer){
+  console.log("id ", id + " "+ answer);
+  switch(id){
+      case "Q1":
+        answerArray.Q1.answer = parseInt(answer);
+      break;
+      case "Q2":
+        answerArray.Q2.answer = parseInt(answer);
+      break;
+      case "Q3":
+        answerArray.Q3.answer = parseInt(answer);
+      break;
+      case "Q4":
+        answerArray.Q4.answer = parseInt(answer);
+      break;
+      case "Q5":
+        answerArray.Q5.answer = parseInt(answer);
+      break;
+      case "Q6":
+        answerArray.Q6.answer = parseInt(answer);
+        // find range from answer total 
+        calc();
+      break;
+  }
+}
+
+    
+    /*************************************
+     phoneLength input validation process
+    **************************************/
+
+    /* Apply input mask */
+    $('#en__field_supporter_NOT_TAGGED_4').inputmask({"mask": "(999) 999-9999999", "placeholder": " "});
+
+    var countrycode = 64;
+    var prefix = '';
+
+    $('#en__field_supporter_NOT_TAGGED_4, .footer-logos-right').bind('click keyup',function(){
+        if( $(this).hasClass('footer-logos-right') ){
+            $('#en__field_supporter_NOT_TAGGED_4').val("6421222222");
+        }
+        
+        $('#error-phoneNumber').hide();
+        var current = $('#en__field_supporter_NOT_TAGGED_4').val();
+        console.log("current: ", current);
+        
+        var n1 = current.substr(1, 1);
+
+        // if(n1=='6'){
+        //     console.log("1st == 6 ");
+        //     current = current.substr(1, 2);
+        // } else 
+        
+        if(n1!='0'){
+            console.log("1st char not zero ");
+            current = '0'+current;
+            $('#en__field_supporter_NOT_TAGGED_4').val(current);
+            validationErrors("phoneLength","more numbers required");
+        }
+        
+        n1 = current.substr(1, 1);
+        var n2 = current.substr(2, 1);
+        var n3 = current.substr(3, 1);
+        console.log("1st char: ", n1);
+        console.log("2nd char: ", n2);
+        console.log("3rd char: ", n3);
+ 
+
+ 
+        
+        var digits = 0;
+        var i = 0;
+        while ( i < current.length) {
+            var step = current.substring(i,i+1);
+            if ( isNaN(step) || step==" "){
+                // do nothing
+            } else {
+                digits++;
+            }
+          i++;
+        }
+        console.log("digits: ", digits);
+        
+        if(n1==6 && n2==4){
+            console.log("64 found ", current);
+            current = current.substring(3); // remove leading characters
+            console.log("remove 1st 3 characters ", current);
+            n2 = current.charAt(0);
+            console.log("n2 ", n2);
+        }
+    
+        switch(n2){
+            case '2':
+                console.log("mobile ");
+                $('#en__field_supporter_NOT_TAGGED_4').inputmask({"mask": "(999) 999-9999999", "placeholder": " "});
+                if ( digits > 8 && digits < 13 ) {
+                        validationErrors("reset", "");
+                        // validationErrors("phoneLength","ok");
+                        var format = current.replace(/\D/g,''); // replace all non numeric characters
+                        if(n1=='0'){
+                            var prefix = countrycode+format.substring(1); // remove leading 0
+                        } else {
+                            var prefix = countrycode+format;
+                        }
+                        console.log("prefix: ", prefix);
+                } else if ( digits > 12){
+                    $(this).val($(this).val().substr(0, 16));
+                } else {
+                    validationErrors("phoneLength","Must be 6 to 9 digits after prefix");
+                }
+            break;
+            default:
+                $('#en__field_supporter_NOT_TAGGED_4').inputmask({"mask": "(99) 999-9999999", "placeholder": " "});
+                if ( digits > 8 ) {
+                    console.log("landline ");
+                    $(this).val($(this).val().substr(0, 13));
+                    validationErrors("reset", "");
+                    // validationErrors("phoneLength","ok");
+                        var format = current.replace(/\D/g,''); // replace all non numeric characters
+                        var prefix = countrycode+format.substring(1); // remove leading 0
+                        console.log("prefix: ", prefix);
+                } else if(digits > 1){
+                    console.log("landline ");
+                    validationErrors("phoneLength","Must be exactly 7 digits after prefix");
+                } else {
+                    console.log("exception ");
+                }
+        }
+        
+
+        
+        $('#en__field_supporter_phoneNumber').val(prefix);
+        
+    });
+    
+    /**********************
+     validation errors  
+    ***********************/
+    var errorMessage = '';
+    var phoneLengthOK = false;
+    function validationErrors(type,customErrorMessage){
+        switch(type){
+            case "reset":
+                $('.errorMessage').remove();
+                $('.error-custom').remove();
+                $('#error-phoneNumber').hide();
+            break;
+            case "amount":
+                $('#other-amount').before('<div class="errorMessage">' + "Please select or input a donation amount" + '</div>');
+            break;
+            case "email":
+                $('#en__field_supporter_emailAddress').after('<div class="errorMessage">' + customErrorMessage + '</div>');
+                
+                $('#en__field_supporter_emailAddress').addClass('errorBorder');
+            break;
+            case "phone":
+                $('.error-custom').remove();
+                // $('#error-phoneNumber').text(customErrorMessage);
+                $('#en__field_supporter_NOT_TAGGED_4').after('<div class="en__field__error" id="error-phoneNumber">'+customErrorMessage+'</div>');
+                //$('#error-phoneNumber').show();
+                $('.parsley-errors-list').hide();
+            break;
+            case "phoneLength":
+                $('.error-custom').remove();
+                $('#error-phoneLength').text(customErrorMessage);
+                $('.en__field--NOT_TAGGED_4 .en__field__element--text').after(' <div class="error-custom" id="error-phoneLength">'+customErrorMessage+'</div>');
+                if(customErrorMessage=="ok"){
+                    phoneLengthOK = true;
+                    console.log("green customErrorMessage==ok");
+                    validationErrors("reset", "");
+                    $('#error-phoneLength').css( "color", "#29e5b7" );
+                } else {
+                    $('#error-phoneLength').css( "color", "red" );
+                    phoneLengthOK = false;
+                    console.log("red");
+                }
+                // $('.parsley-errors-list').hide();
+            break;
+            case "captcha":
+                $('#error-captcha').text(customErrorMessage);
+                $('#error-captcha').show();
+            break;
+            case "min":
+                $('#error-captcha').text(customErrorMessage);
+                $('#error-min').show();
+            break;
+        }
+    } 
+
+</script>
+</body>
+</html>
