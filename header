@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <!-- header scripts GTM/FB -->
+    
+    <title>${page~title}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    
+        <!-- Bootstrap -->
+        <!--<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" />-->
+        
+        <link href="//fonts.googleapis.com/css?family=Oswald:700" rel="stylesheet" />
+        <!-- Font Awesome -->
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        
+        <meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:site" content="Greenpeace New Zealand" />
+	<meta name="twitter:title" content="Are you one of the bold?">
+			<meta name="twitter:description" content="Take the quiz now to see what sort of courage you have, and whether it's enough to be one of the bold">
+	
+			<meta name="twitter:creator" content="Nick Young">
+	
+			<meta name="twitter:image" content="https://aaf1a18515da0e792f78-c27fdabe952dfc357fe25ebf5c8897ee.ssl.cf5.rackcdn.com/1939/quiz-og-image.png?v=1575574278000" />
+    
+<style>
+body{
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+    height: 100vh;
+}
+section h2{
+    font-size: 2em;
+}
+.hidden, .en__field--phoneNumber, .en__field--NOT_TAGGED_12{
+    display: none;
+}
+.calc{
+    padding-right: 2rem;
+}
+div#start{
+    width: 50%;
+    margin-left: 5%;
+}
+#introText{
+    position: absolute;
+    top: 3em;
+    right: 3em;
+    width: 30%;
+    font-size: 1.2em;
+    line-height:1.3em;
+    padding: 1.5em;
+    background: rgba(100%,100%,100%,50%);
+}
+#introText p{
+    margin-top: 0;
+}
+#start h2{
+    font-size: 5em;
+    color: white;
+}
+#start h3{
+    font-size: 3em;
+    color: white;
+}
+button.start {
+  background: white;
+  border: none;
+  font-size: 2em;
+  border-radius: 0.1em;
+  margin-bottom: 1em;
+  cursor: pointer;
+  padding: 0.5em;
+}
+/**************
+*** HOVERS ****
+***************/
+button.start:hover, .en__submit button:hover, li button:hover{
+   background: grey;
+   color: white;
+}
+#gpLogo{
+    background: url(https://aaf1a18515da0e792f78-c27fdabe952dfc357fe25ebf5c8897ee.ssl.cf5.rackcdn.com/1939/gp-logo-white-tiny.png?v=1575425255000);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 200px;
+    height: 33px;
+    position: absolute;
+    top: 2em;
+    cursor: pointer;
+}
+#gpLogo:hover{
+    background: url(https://aaf1a18515da0e792f78-c27fdabe952dfc357fe25ebf5c8897ee.ssl.cf5.rackcdn.com/1939/gp-logo-green-tiny.png?v=1575424946000);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.wrap{
+    height: 90%;
+    padding: 5%;
+    overflow-y: auto;
+    position: relative;
+}
+section{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    top: -200vh;
+    left: 0;
+    background: #eee;
+    -webkit-transition: all 1.5s ease-in-out;
+    -moz-transition: all 1.5s ease-in-out;
+    -ms-transition: all 1.5s ease-in-out;
+    -o-transition: all 1.5s ease-in-out;
+    transition: all 1.5s ease-in-out;
+}
+section.transitionIn{
+    opacity: 1;
+    display: block;
+    top: 0;
+    left: 0;
+}
+section.transitionOut{
+    opacity: 0;
+    left: 0;
+    bottom: 0;
+    background-size: 0 !important;
+}
+button{
+  width: auto;
+  background: white;
+  border: none;
+}
+.intro{
+    padding: 1em;
+}
+li button{
+    background: white;
+    border: none;
+    font-size: 2em;
+    border-radius: 0.1em;
+    margin-bottom: 1em;
+    cursor: pointer;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
+ul {
+    /*margin-left: auto;*/
+    /*margin-right: auto;*/
+    display: table;
+    list-style: none;
+    padding-left: 0;
+}
+li{
+  font-size: 1em;
+  line-height: 1.5em;
+  display: block;
+}
+li span{
+    vertical-align: top;
+}
+section#intro{
+    opacity: 1;
+    display: block;
+    /*text-align: center;*/
+  /*  background: url(https://aaf1a18515da0e792f78-c27fdabe952dfc357fe25ebf5c8897ee.ssl.cf5.rackcdn.com/1939/survey-bold-intro.jpg?v=1574981325000);*/
+ background: url(https://storage.googleapis.com/planet4-new-zealand-stateless/2019/12/8d6e1ae4-otb-omv.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    -webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -ms-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
+}
+.courage {
+    font-size: 3em;
+}
+.result1 img, .result2 img, .result3 img, .result4 img, .result5 img, .result6 img{
+    width: 100%;
+}
+.courage h2, .result1, .result2, .result3, .result4, .result5, .result6{
+    display: none;
+}
+.en__submit button{
+    padding: 0.5em;
+    font-size: 1.5em;
+    border-radius: 0.1em;
+    cursor: pointer;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
+.row{
+    display: flex;
+}
+.col{
+    width: 33.3%;
+}
+.dImage img{
+    width: 100%;
+    height: auto;
+}
+.courage, .formHeading{
+    font-family: Oswald;
+    font-size: 3em;
+    text-transform: uppercase;
+}
+.dText {
+    /*font-size: 0.5em;*/
+}
+.dText p{
+    margin-top: 0;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+.dText h2{
+    padding-left: 1rem;
+}
+.dShare h2{
+    font-family: Oswald;
+    text-transform: uppercase;
+    margin-top: 0;
+}
+.darkRed, .red{
+    color: red;
+}
+.share{
+    color: white;
+    padding: 1em;
+    border: 0.25em solid white;
+    display: block;
+    text-align: center;
+
+}
+a.share{
+    text-decoration: none;
+}
+.twitter{
+    background: #55acee;
+}
+.facebook{
+    background: #3b5998;
+}
+.en__field__error{
+    color: red;
+}
+input.en__field__input--text{
+    padding: 1em;
+    font-size: 1em;
+}
+input.en__field__input--checkbox{
+    display: inline-block;
+    vertical-align: top; 
+}
+
+label {
+    display: inline-block;
+    /*margin-left: 100px;*/
+    /*margin-right: -100px;*/
+}
+.mobile{
+    display: none;
+}
+.space{
+    height: 5em;
+}
+@media only screen and (min-width: 600px) {
+    section{
+        height: auto !important;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .mobile{
+        display: block;
+    }
+    .formHeading{
+        font-size: 1.5em;
+    }
+    .courage h2{
+        font-size: 1em;
+    }
+    section{
+        top: -300vh;
+    }
+    .details h2{
+        font-size: 1.5em;
+        margin-top: 1rem;
+    }
+    .space{
+        height: 0;
+    }
+    .en__field__element--checkbox label {
+        font-size: 0.75em;
+    }
+    .wrap{
+        /*padding-top: 75px;*/
+    }
+    #start h2{
+        font-family: Oswald;
+        font-size: 3em;
+    }
+    #start h3{
+        font-size: 2em;
+    }
+    #introText{
+        position: relative;
+        right: 0;
+        width: 80%;
+        padding: 10%;
+    }
+    section{
+        /*width: 90%;*/
+        /*height: 90vh;*/
+        /*padding: 5%;*/
+    }
+    .col{
+        width: 100%;
+    }
+    div#start{
+        width: 90%;
+        margin-top: 200px;
+    }
+    h2{
+        margin-top: 75px;
+        font-size: 2em;
+    }
+    .dHeading{
+        font-size: 1.5em;
+    }
+    .dHeading p{
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    .dText{
+        padding-top: 1em;
+    }
+    .dText p{
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+}
+</style>
+</head>
+<body>
+<section id="intro" class="transitionIn">
+    <div class="wrap">
+        <div id="start">
+            <div id="gpLogo"></div>
+            <h2>ARE YOU ONE OF THE BOLD?</h2> 
+            <h3>Take this short quiz to find out!</h3>
+            <button type="button" class="start" value="1">Get Started</button>
+        </div>
+        <div id="introText">
+            <p>Our history is built on moments where ordinary people like you decided that they had to act, and do something extraordinary for the greater good. </p>
+            
+            <p>We need those people now more than ever. People like you. The climate and ecological crisis is the gravest threat we’ve ever faced.</p>
+            	 	 	 	
+            <p><strong>Could you be one of these people? Take this quiz to find out now!</strong></p>
+            
+            <button type="button" class="start mobile" value="1">Get Started</button>
+        </div>
+    </div>
+</section>
+<section id="Q1">
+    <div class="wrap">
+    <div id="gpLogo"></div>
+    <h2></h2>
+        <ul>
+            <li><button type="button" value="1"></button></li>
+            <li><button type="button" value="2"></button></li>
+            <li><button type="button" value="3"></button></li>
+            <li><button type="button" value="4"></button></li>
+            <li><button type="button" value="5"></button></li>
+            <li><button type="button" value="6"></button></li>
+        </ul>
+    </div>
+</section>
+<section id="Q2">
+    <div class="wrap">
+        <div id="gpLogo"></div>
+        <h2></h2>
+        <ul>
+            <li><button type="button" value="1"></button></li>
+            <li><button type="button" value="2"></button></li>
+            <li><button type="button" value="3"></button></li>
+            <li><button type="button" value="4"></button></li>
+            <li><button type="button" value="5"></button></li>
+            <li><button type="button" value="6"></button></li>
+        </ul>
+    </div>
+</section>
+<section id="Q3">
+    <div class="wrap">
+        <div id="gpLogo"></div>
+	    <h2></h2>
+        <ul>
+            <li><button type="button" value="1"></button></li>
+			<li><button type="button" value="2"></button></li>
+			<li><button type="button" value="3"></button></li>
+			<li><button type="button" value="4"></button></li>
+			<li><button type="button" value="5"></button></li>
+			<li><button type="button" value="6"></button></li>
+       </ul>
+    </div>
+</section>
+<section id="Q4">
+    <div class="wrap">
+        <div id="gpLogo"></div>
+        <h2></h2>
+        <ul>
+            <li><button type="button" value="1"></button></li>
+			<li><button type="button" value="2"></button></li>
+			<li><button type="button" value="3"></button></li>
+			<li><button type="button" value="4"></button></li>
+			<li><button type="button" value="5"></button></li>
+			<li><button type="button" value="6"></button></li>
+        </ul>
+    </div>
+</section>
+<section id="Q5">
+    <div class="wrap">
+        <div id="gpLogo"></div>
+	    <h2></h2>
+        <ul>
+            <li><button type="button" value="1"></button></li>
+			<li><button type="button" value="2"></button></li>
+			<li><button type="button" value="3"></button></li>
+			<li><button type="button" value="4"></button></li>
+			<li><button type="button" value="5"></button></li>
+			<li><button type="button" value="6"></button></li>
+       </ul>
+    </div>
+</section>
+<section id="Q6">
+    <div class="wrap">
+        <div id="gpLogo"></div>
+	    <h2></h2>
+        <ul>
+            <li><button type="button" value="1"></button></li>
+    		<li><button type="button" value="2"></button></li>
+    		<li><button type="button" value="3"></button></li>
+    		<li><button type="button" value="4"></button></li>
+    		<li><button type="button" value="5"></button></li>
+    		<li><button type="button" value="6"></button></li>
+       	</ul>
+   	</div>
+</section>
+<section id="Q7">
+    <div class="wrap">
+        <div id="gpLogo"></div>
